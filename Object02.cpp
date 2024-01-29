@@ -14,6 +14,10 @@ void Object02::Initialize()
 
 void Object02::Update()
 {
+	// é©êgÇÃâ~å`
+	circle_.center_ = { transform_.position_.x,transform_.position_.z };
+	circle_.radius_ = 1.f;
+
 	if (Input::IsKey(DIK_W))transform_.position_.z += 0.1f;
 	if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1f;
 	if (Input::IsKey(DIK_S))transform_.position_.z -= 0.1f;

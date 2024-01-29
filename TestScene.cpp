@@ -1,5 +1,7 @@
 #include "TestScene.h"
+
 #include "Object01.h"
+#include "Object02.h"
 
 TestScene::TestScene(GameObject * parent)
 	: GameObject(parent, "TestScene")
@@ -9,6 +11,7 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {
 	Instantiate<Object01>(this);
+	Instantiate<Object02>(this);
 }
 
 void TestScene::Update()
