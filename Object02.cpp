@@ -10,6 +10,8 @@ Object02::Object02(GameObject* _pParent)
 void Object02::Initialize()
 {
 	hModel_ = Model::Load("DebugCollision/CircleCollider.fbx");
+	transform_.position_ = { -2,0,-3 };
+
 }
 
 void Object02::Update()

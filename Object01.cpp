@@ -14,6 +14,8 @@ void Object01::Initialize()
 {
 	hCircle_ = Model::Load("DebugCollision/CircleCollider.fbx");
 	hCircle_ = Model::Load("Models/Ore.fbx");
+	transform_.position_ = { 2,0,0 };
+
 }
 
 void Object01::Update()
