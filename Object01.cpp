@@ -31,7 +31,6 @@ void Object01::Update()
 	else {
 		ImGui::Text("circle_.OverlapCircle = false");
 	}
-
 }
 
 void Object01::Draw()
