@@ -4,7 +4,8 @@
 
 class Object01 : public GameObject
 {
-	int hModel_;
+	int hCircle_;
+	int hOre_;
 	Circle circle_;
 public:
 	Object01(GameObject* _pParent);

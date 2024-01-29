@@ -12,7 +12,8 @@ Object01::Object01(GameObject* _pParent)
 
 void Object01::Initialize()
 {
-	hModel_ = Model::Load("DebugCollision/CircleCollider.fbx");
+	hCircle_ = Model::Load("DebugCollision/CircleCollider.fbx");
+	hCircle_ = Model::Load("Models/Ore.fbx");
 }
 
 void Object01::Update()
@@ -35,8 +36,11 @@ void Object01::Update()
 
 void Object01::Draw()
 {
-	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
+	Model::SetTransform(hCircle_, transform_);
+	Model::Draw(hCircle_);
+
+	Model::SetTransform(hOre_, transform_);
+	Model::Draw(hOre_);
 }
 
 void Object01::Release()

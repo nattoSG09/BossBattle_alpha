@@ -113,7 +113,6 @@
     <ClCompile Include="Object01.cpp">
       <Filter>Game\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine\ImGui\imgui.cpp">
       <Filter>01Engine\ImGui</Filter>
     </ClCompile>
@@ -134,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="Object02.cpp">
       <Filter>Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,7 +214,6 @@
     <ClInclude Include="Object01.h">
       <Filter>Game\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Circle.h" />
     <ClInclude Include="Engine\ImGui\imconfig.h">
       <Filter>01Engine\ImGui</Filter>
     </ClInclude>
@@ -239,6 +240,9 @@
     </ClInclude>
     <ClInclude Include="Object02.h">
       <Filter>Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
