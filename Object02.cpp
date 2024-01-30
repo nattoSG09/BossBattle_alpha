@@ -9,9 +9,11 @@ Object02::Object02(GameObject* _pParent)
 
 void Object02::Initialize()
 {
-	hModel_ = Model::Load("DebugCollision/CircleCollider.fbx");
-	transform_.position_ = { -2,0,-3 };
+	hCircle_ = Model::Load("DebugCollision/CircleCollider.fbx");
+	hCharacter_ = Model::Load("Models/Character.fbx");
 
+	transform_.position_ = { -2,0,-3 };
+	transform_.rotate_.y = 90;
 }
 
 void Object02::Update()
@@ -28,8 +30,14 @@ void Object02::Update()
 
 void Object02::Draw()
 {
-	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
+	Model::SetTransform(hCircle_, transform_);
+	Model::Draw(hCircle_);
+
+	Transform tc = transform_;
+	tc.scale_ = { 2.f,2.f,2.f };
+
+	Model::SetTransform(hCharacter_, tc);
+	Model::Draw(hCharacter_);
 }
 
 void Object02::Release()
