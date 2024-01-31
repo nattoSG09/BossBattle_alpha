@@ -41,9 +41,9 @@ void Object01::Update()
 
 		fan.direction_ = XMFLOAT2(/*進行方向ベクトル*/XMVectorGetX(travelDir), XMVectorGetZ(travelDir));
 		
+		// 移動キーが押されている間のみprevPositionを更新する
 		if(Input::IsKey(DIK_W) || Input::IsKey(DIK_A) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D))prevPos_ = transform_.position_;
 	}
-	
 
 	auto o2Pos = ((Object02*)FindObject("Object02"))->GetPosition();
 	ImGui::Text("object02 Position = %f,%f", o2Pos.x, o2Pos.z);
@@ -57,9 +57,7 @@ void Object01::Update()
 	}
 
 	// 移動
-	if (Input::IsKey(DIK_W)) {
-		transform_.position_.z += 0.1f;
-	}
+	if (Input::IsKey(DIK_W)) transform_.position_.z += 0.1f;
 	if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1f;
 	if (Input::IsKey(DIK_S))transform_.position_.z -= 0.1f;
 	if (Input::IsKey(DIK_D))transform_.position_.x += 0.1f;
