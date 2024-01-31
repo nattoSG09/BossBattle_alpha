@@ -63,7 +63,6 @@ void Object01::Update()
 	if (Input::IsKey(DIK_D))transform_.position_.x += 0.1f;
 }
 
-
 void Object01::Draw()
 {
 
