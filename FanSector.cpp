@@ -39,3 +39,23 @@ bool FanSector::ContainsPoint(const XMFLOAT2 _point)
 
     return angleCos <= dot;
 }
+
+XMFLOAT2 FanSector::GetEndpoint1()
+{
+    float angleInRadians = XMConvertToRadians(angle_ / 2.0f);
+
+    float x = center_.x + length_ * cos(angleInRadians) * direction_.x - length_ * sin(angleInRadians) * direction_.y;
+    float y = center_.y + length_ * sin(angleInRadians) * direction_.x + length_ * cos(angleInRadians) * direction_.y;
+
+    return XMFLOAT2(x, y);
+}
+
+XMFLOAT2 FanSector::GetEndpoint2()
+{
+    float angleInRadians = XMConvertToRadians(-angle_ / 2.0f);
+
+    float x = center_.x + length_ * cos(angleInRadians) * direction_.x - length_ * sin(angleInRadians) * direction_.y;
+    float y = center_.y + length_ * sin(angleInRadians) * direction_.x + length_ * cos(angleInRadians) * direction_.y;
+
+    return XMFLOAT2(x, y);
+}

@@ -20,8 +20,6 @@ void Object02::Update()
 
 void Object02::Draw()
 {
-	
-
 	Transform tp = transform_; {
 		tp.position_.y = -0.5f;
 	}

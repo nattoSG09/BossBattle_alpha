@@ -18,7 +18,7 @@ namespace {
 
 
 Object01::Object01(GameObject* _pParent)
-	:GameObject(_pParent,"Object01"),fan(transform_.position_.x,transform_.position_.z,3,90,XMFLOAT2(1,0))
+	:GameObject(_pParent,"Object01"),fan(transform_.position_.x,transform_.position_.z,2,90,XMFLOAT2(1,0))
 {
 }
 
@@ -42,21 +42,7 @@ void Object01::Update()
 		
 		// 移動キーが押されている間のみprevPositionを更新する
 		if(Input::IsKey(DIK_W) || Input::IsKey(DIK_A) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D))prevPos_ = transform_.position_;
-	
-		// 扇の端点２つの位置を求める
-		//{
-		//	// 扇のベクトルを取得
-		//	XMVECTOR fandirVec_ = XMVectorScale(XMLoadFloat3(&XMFLOAT3(fan.direction_.x,fan.direction_.y,0.f)), fan.length_);
-
-		//	// 扇のベクトルを扇の角度/2分+-に回す！
-
-		//	// 回した先が端点+がfan1,-がfan2
-
-		//	fan1.position_ = {}
-		//}
 	}
-
-	
 
 	auto o2Pos = ((Object02*)FindObject("Object02"))->GetPosition();
 	ImGui::Text("object02 Position = %f,%f", o2Pos.x, o2Pos.z);
@@ -90,6 +76,17 @@ void Object01::Draw()
 	Direct3D::SetShader(Direct3D::SHADER_3D);
 	Model::SetTransform(hm_Point_, tp);
 	Model::Draw(hm_Point_);
+
+	auto e1 = fan.GetEndpoint1();
+	tp.position_ = { e1.x,-0.5f,e1.y };
+	Model::SetTransform(hm_Point_, tp);
+	Model::Draw(hm_Point_);
+
+	auto e2 = fan.GetEndpoint2();
+	tp.position_ = { e2.x,-0.5f,e2.y };
+	Model::SetTransform(hm_Point_, tp);
+	Model::Draw(hm_Point_);
+
 }
 
 void Object01::Release()

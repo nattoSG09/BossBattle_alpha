@@ -12,5 +12,8 @@ public:
     FanSector(float _cX, float _cY, float _length, float _angle, XMFLOAT2 _direction);
 
     bool ContainsPoint(const XMFLOAT2 _point);
+
+    XMFLOAT2 GetEndpoint1();
+    XMFLOAT2 GetEndpoint2();
 };
 
