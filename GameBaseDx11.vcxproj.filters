@@ -137,6 +137,9 @@
     <ClCompile Include="Circle.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="FanSector.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -242,6 +245,9 @@
       <Filter>Game\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Circle.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="FanSector.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
