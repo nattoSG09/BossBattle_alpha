@@ -9,6 +9,9 @@ class Object01 : public GameObject
 
 	FanSector fan;
 	XMFLOAT3 prevPos_;
+
+	Transform fan1, fan2;
+
 public:
 	Object01(GameObject* _pParent);
 	void Initialize() override;

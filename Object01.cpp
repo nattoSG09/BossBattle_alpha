@@ -18,7 +18,7 @@ namespace {
 
 
 Object01::Object01(GameObject* _pParent)
-	:GameObject(_pParent,"Object01"),fan(transform_.position_.x,transform_.position_.z,1,90,XMFLOAT2(1,0))
+	:GameObject(_pParent,"Object01"),fan(transform_.position_.x,transform_.position_.z,3,90,XMFLOAT2(1,0))
 {
 }
 
@@ -26,7 +26,6 @@ void Object01::Initialize()
 {
 	hm_Point_ = Model::Load("DebugCollision/Point.fbx");
 	hm_Character_ = Model::Load("DebugCollision/BoxCollider.fbx");
-
 }
 
 void Object01::Update()
@@ -43,7 +42,21 @@ void Object01::Update()
 		
 		// 移動キーが押されている間のみprevPositionを更新する
 		if(Input::IsKey(DIK_W) || Input::IsKey(DIK_A) || Input::IsKey(DIK_S) || Input::IsKey(DIK_D))prevPos_ = transform_.position_;
+	
+		// 扇の端点２つの位置を求める
+		//{
+		//	// 扇のベクトルを取得
+		//	XMVECTOR fandirVec_ = XMVectorScale(XMLoadFloat3(&XMFLOAT3(fan.direction_.x,fan.direction_.y,0.f)), fan.length_);
+
+		//	// 扇のベクトルを扇の角度/2分+-に回す！
+
+		//	// 回した先が端点+がfan1,-がfan2
+
+		//	fan1.position_ = {}
+		//}
 	}
+
+	
 
 	auto o2Pos = ((Object02*)FindObject("Object02"))->GetPosition();
 	ImGui::Text("object02 Position = %f,%f", o2Pos.x, o2Pos.z);
