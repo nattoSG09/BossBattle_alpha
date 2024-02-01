@@ -27,14 +27,14 @@
     <Filter Include="Game">
       <UniqueIdentifier>{9df0d023-626f-4151-bd30-e48255f2f151}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Objects">
-      <UniqueIdentifier>{7dfa9847-ca71-4d72-aa34-f67e234e54b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Scenes">
       <UniqueIdentifier>{f8ce2d7f-9ab5-405d-a638-416f5bc65eb2}</UniqueIdentifier>
     </Filter>
     <Filter Include="01Engine\ImGui">
       <UniqueIdentifier>{7db31c0b-5744-4ce7-ac72-5c7a9d8e725d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Objects">
+      <UniqueIdentifier>{7dfa9847-ca71-4d72-aa34-f67e234e54b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="Circle.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Game\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +246,9 @@
     </ClInclude>
     <ClInclude Include="Circle.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
