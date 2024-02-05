@@ -39,5 +39,10 @@ public:
 	{
 		return XMFLOAT3(a.x + b.x, a.y + b.y, a.z + b.z);
 	}
+
+	static bool AreEqual(const XMFLOAT3& a, const XMFLOAT3& b) {
+		return a.x == b.x && a.y == b.y && a.z == b.z;
+	}
+
 };
 

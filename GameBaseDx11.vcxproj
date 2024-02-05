@@ -155,6 +155,7 @@
     <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
+    <ClCompile Include="FanSector.cpp" />
     <ClCompile Include="Object01.cpp" />
     <ClCompile Include="Object02.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Transform.h" />
+    <ClInclude Include="FanSector.h" />
     <ClInclude Include="Object01.h" />
     <ClInclude Include="Object02.h" />
     <ClInclude Include="Stage.h" />

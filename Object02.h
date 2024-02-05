@@ -1,12 +1,9 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include "Circle.h"
 
 class Object02 : public GameObject
 {
-	int hCircle_;
-	int hCharacter_;
-	Circle circle_;
+	int hm_Point_;
 public:
 	Object02(GameObject* _pParent);
 	void Initialize() override;
@@ -14,6 +11,5 @@ public:
 	void Draw() override;
 	void Release() override;
 
-	Circle GetCircle() { return circle_; }
 };
 

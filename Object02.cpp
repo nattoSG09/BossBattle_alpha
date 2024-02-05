@@ -1,6 +1,7 @@
 #include "Object02.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
+#include "Engine/Direct3D.h"
 
 Object02::Object02(GameObject* _pParent)
 	:GameObject(_pParent,"Object02")
@@ -9,35 +10,23 @@ Object02::Object02(GameObject* _pParent)
 
 void Object02::Initialize()
 {
-	hCircle_ = Model::Load("DebugCollision/CircleCollider.fbx");
-	hCharacter_ = Model::Load("Models/Character.fbx");
-
-	transform_.position_ = { -2,0,-3 };
-	transform_.rotate_.y = 90;
+	hm_Point_ = Model::Load("DebugCollision/Point.fbx");
 }
 
 void Object02::Update()
 {
-	// é©êgÇÃâ~å`
-	circle_.center_ = { transform_.position_.x,transform_.position_.z };
-	circle_.radius_ = 1.f;
-
-	if (Input::IsKey(DIK_W))transform_.position_.z += 0.1f;
-	if (Input::IsKey(DIK_A))transform_.position_.x -= 0.1f;
-	if (Input::IsKey(DIK_S))transform_.position_.z -= 0.1f;
-	if (Input::IsKey(DIK_D))transform_.position_.x += 0.1f;
+	
 }
 
 void Object02::Draw()
 {
-	Model::SetTransform(hCircle_, transform_);
-	Model::Draw(hCircle_);
+	Transform tp = transform_; {
+		tp.position_.y = -0.5f;
+	}
 
-	Transform tc = transform_;
-	tc.scale_ = { 2.f,2.f,2.f };
-
-	Model::SetTransform(hCharacter_, tc);
-	Model::Draw(hCharacter_);
+	Direct3D::SetShader(Direct3D::SHADER_3D);
+	Model::SetTransform(hm_Point_, tp);
+	Model::Draw(hm_Point_);
 }
 
 void Object02::Release()

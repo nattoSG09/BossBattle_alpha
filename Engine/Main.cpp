@@ -61,10 +61,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
-	ImGui::StyleColorsDark();
 
+	ImGuiStyle& style = ImGui::GetStyle();
+	style.ScaleAllSizes(3.0f); // すべてのサイズをスケーリング
+	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init(hWnd);
 	ImGui_ImplDX11_Init(Direct3D::pDevice_,Direct3D::pContext_);
+
 
 	//カメラを準備
 	Camera::Initialize();
