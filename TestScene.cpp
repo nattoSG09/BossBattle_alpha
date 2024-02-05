@@ -1,5 +1,8 @@
 #include "TestScene.h"
 
+#include "Rect.h"
+#include "Engine/Input.h"
+
 TestScene::TestScene(GameObject * parent)
 	: GameObject(parent, "TestScene")
 {
@@ -7,6 +10,7 @@ TestScene::TestScene(GameObject * parent)
 
 void TestScene::Initialize()
 {
+	XMFLOAT3 mPos = Input::GetMousePosition();
 
 }
 
