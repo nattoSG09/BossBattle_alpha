@@ -1,5 +1,10 @@
 #include "Rect.h"
 
+Rect::Rect()
+    :Rect(0.f,0.f,5.f,5.f)
+{
+}
+
 Rect::Rect(float _cx, float _cy, float _width, float _height)
 	:Rect(XMFLOAT2(_cx,_cy),_width,_height)
 {

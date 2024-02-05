@@ -10,6 +10,7 @@ public:
 	float width_;
 	float height_;
 
+	Rect();
 	Rect(float _cx, float _cy, float _width, float _height);
 	Rect(XMFLOAT2 _center, float _width, float _height);
 

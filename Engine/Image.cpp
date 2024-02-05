@@ -191,5 +191,9 @@ namespace Image
 		}
 		return _datas[handle]->transform.GetWorldMatrix();
 	}
+	XMFLOAT2 GetSize(int handle)
+	{
+		return XMFLOAT2();
+	}
 }
 
