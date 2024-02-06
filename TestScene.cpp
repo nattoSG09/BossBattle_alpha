@@ -10,7 +10,12 @@ TestScene::TestScene(GameObject * parent)
 
 void TestScene::Initialize()
 {	
-	// 
+	// 作りたいゲーム・・・ない
+
+	// 必要なGameObject
+	// プレイヤー
+	// 鉱石
+	// フィールド
 }
 
 void TestScene::Update()
