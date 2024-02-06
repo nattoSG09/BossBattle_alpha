@@ -159,6 +159,7 @@
     <ClCompile Include="FanSector.cpp" />
     <ClCompile Include="Object01.cpp" />
     <ClCompile Include="Object02.cpp" />
+    <ClCompile Include="Object03.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
@@ -199,6 +200,7 @@
     <ClInclude Include="FanSector.h" />
     <ClInclude Include="Object01.h" />
     <ClInclude Include="Object02.h" />
+    <ClInclude Include="Object03.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="TestScene.h" />
   </ItemGroup>

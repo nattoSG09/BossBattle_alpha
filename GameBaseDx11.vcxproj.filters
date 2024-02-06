@@ -144,6 +144,7 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Object03.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -258,6 +259,7 @@
     <ClInclude Include="Rect.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Object03.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
