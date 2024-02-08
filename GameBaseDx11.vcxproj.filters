@@ -36,6 +36,12 @@
     <Filter Include="01Engine\ImGui">
       <UniqueIdentifier>{7db31c0b-5744-4ce7-ac72-5c7a9d8e725d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Objects\Player">
+      <UniqueIdentifier>{02a8e0da-764d-4a18-a099-e1e773bdc255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Objects\Player\State">
+      <UniqueIdentifier>{9fb6e2fa-ea61-46a3-955f-e15ca718274b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -110,9 +116,6 @@
     <ClCompile Include="TestScene.cpp">
       <Filter>Game\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Object01.cpp">
-      <Filter>Game\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\ImGui\imgui.cpp">
       <Filter>01Engine\ImGui</Filter>
     </ClCompile>
@@ -131,9 +134,6 @@
     <ClCompile Include="Engine\ImGui\imgui_widgets.cpp">
       <Filter>01Engine\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Object02.cpp">
-      <Filter>Game\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Circle.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -144,7 +144,18 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Object03.cpp" />
+    <ClCompile Include="Stage.cpp">
+      <Filter>Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Standby.cpp">
+      <Filter>Game\Objects\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Game\Objects\Player\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -219,9 +230,6 @@
     <ClInclude Include="TestScene.h">
       <Filter>Game\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Object01.h">
-      <Filter>Game\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\ImGui\imconfig.h">
       <Filter>01Engine\ImGui</Filter>
     </ClInclude>
@@ -246,9 +254,6 @@
     <ClInclude Include="Engine\ImGui\imstb_truetype.h">
       <Filter>01Engine\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Object02.h">
-      <Filter>Game\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Circle.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -259,7 +264,18 @@
     <ClInclude Include="Rect.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Object03.h" />
+    <ClInclude Include="Stage.h">
+      <Filter>Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Standby.h">
+      <Filter>Game\Objects\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Game\Objects\Player\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

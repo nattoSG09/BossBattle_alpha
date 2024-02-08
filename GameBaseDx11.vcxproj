@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -157,10 +157,11 @@
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="FanSector.cpp" />
-    <ClCompile Include="Object01.cpp" />
-    <ClCompile Include="Object02.cpp" />
-    <ClCompile Include="Object03.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="Standby.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -198,10 +199,11 @@
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="FanSector.h" />
-    <ClInclude Include="Object01.h" />
-    <ClInclude Include="Object02.h" />
-    <ClInclude Include="Object03.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="Standby.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="TestScene.h" />
   </ItemGroup>
   <ItemGroup>
