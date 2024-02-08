@@ -156,6 +156,7 @@
     <ClCompile Include="State.cpp">
       <Filter>Game\Objects\Player\State</Filter>
     </ClCompile>
+    <ClCompile Include="DiamondOre.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -276,6 +277,7 @@
     <ClInclude Include="State.h">
       <Filter>Game\Objects\Player\State</Filter>
     </ClInclude>
+    <ClInclude Include="DiamondOre.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

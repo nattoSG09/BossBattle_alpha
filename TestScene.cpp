@@ -4,6 +4,7 @@
 
 #include "Stage.h"
 #include "Player.h"
+#include "DiamondOre.h"
 
 TestScene::TestScene(GameObject * parent)
 	: GameObject(parent, "TestScene")
@@ -23,7 +24,7 @@ void TestScene::Initialize()
 		Instantiate<Player>(this);
 
 		// 鉱石
-
+		Instantiate<DiamondOre>(this);
 
 		// ステージ
 		Instantiate<Stage>(this);
