@@ -6,7 +6,7 @@
 
 #include "State.h"
 #include "Standby.h"
-
+#include "Ore.h"
 
 Player::Player(GameObject* _pParent)
 	:GameObject(_pParent,"Player")
@@ -78,7 +78,17 @@ void Player::Update()
 			Model::SetAnimFrame(hModel_, 0, 0, 0);
 			prevAnim = false;
 		}
+	}
 
+	{// 採掘を行う
+		Ore* ore = (Ore*)FindObject("Ore");
+		if (ore != nullptr) {
+			// 範囲内かつ、スペースキーを押したら...
+			if (ore->GetCircle().ContainsPoint(transform_.position_.x, transform_.position_.z)) {
+				ImGui::Text("mining ok");
+				if(Input::IsKeyDown(DIK_SPACE))ore->KillMe();
+			}
+		}
 	}
 }
 

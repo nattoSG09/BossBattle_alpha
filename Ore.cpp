@@ -24,13 +24,7 @@ void Ore::Update()
 
 	ImGui::Text("Ore Circle center = { x %f,z %f }", circle_.center_.x, circle_.center_.y);
 	ImGui::Text("Ore Circle radius = %f", circle_.radius_);
-
 	ImGui::Text("Ore Position = { x %f,y %f,z %f", transform_.position_.x, transform_.position_.y, transform_.position_.z);
-	XMFLOAT3 playerPos = ((Player*)FindObject("Player"))->GetPosition();
-	if (circle_.ContainsPoint(playerPos.x,playerPos.z)) {
-		ImGui::Text("Can be mined");
-	}
-
 }
 
 void Ore::Draw()
