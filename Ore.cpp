@@ -13,7 +13,6 @@ void Ore::Initialize()
 	hModel_ = Model::Load("Models/iron_ore.fbx");
 	//transform_.scale_ = { 2.f,2.f, 2.f };
 	transform_.rotate_.y = 90;
-	transform_.position_ = { 2.f,0.f,5.f };
 }
 
 void Ore::Update()
