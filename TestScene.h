@@ -5,7 +5,6 @@ class Button;
 
 class TestScene : public GameObject
 {
-	Button* pButton_;
 public:
 	TestScene(GameObject* parent);
 	void Initialize() override;

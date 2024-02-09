@@ -14,6 +14,7 @@ public:
     Circle(float _cX, float _cY, float _radius);
 
     bool ContainsPoint(XMFLOAT2 _point);
+    bool ContainsPoint(float _px,float _py);
     bool OverlapCircle(Circle _circle);
 };
 

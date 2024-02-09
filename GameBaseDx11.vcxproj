@@ -127,7 +127,7 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Circle.cpp" />
-    <ClCompile Include="DiamondOre.cpp" />
+    <ClCompile Include="Ore.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
     <ClCompile Include="Engine\BillBoard.cpp" />
     <ClCompile Include="Engine\BoxCollider.cpp" />
@@ -168,7 +168,7 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Circle.h" />
-    <ClInclude Include="DiamondOre.h" />
+    <ClInclude Include="Ore.h" />
     <ClInclude Include="Engine\Audio.h" />
     <ClInclude Include="Engine\BillBoard.h" />
     <ClInclude Include="Engine\BoxCollider.h" />
