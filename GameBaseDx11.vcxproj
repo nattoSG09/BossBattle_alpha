@@ -129,7 +129,6 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Engine\Transition.cpp" />
     <ClCompile Include="LoadScene.cpp" />
-    <ClCompile Include="Moving.cpp" />
     <ClCompile Include="Ore.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
     <ClCompile Include="Engine\BillBoard.cpp" />
@@ -165,16 +164,13 @@
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="Stage.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="TestScene.cpp" />
-    <ClCompile Include="Waiting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Engine\Transition.h" />
     <ClInclude Include="LoadScene.h" />
-    <ClInclude Include="Moving.h" />
     <ClInclude Include="Ore.h" />
     <ClInclude Include="Engine\Audio.h" />
     <ClInclude Include="Engine\BillBoard.h" />
@@ -212,9 +208,7 @@
     <ClInclude Include="Rect.h" />
     <ClInclude Include="SkySphere.h" />
     <ClInclude Include="Stage.h" />
-    <ClInclude Include="State.h" />
     <ClInclude Include="TestScene.h" />
-    <ClInclude Include="Waiting.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\BillBoard.hlsl">

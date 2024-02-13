@@ -21,9 +21,9 @@ void Ore::Update()
 	circle_.center_ = { transform_.position_.x,transform_.position_.z };
 	circle_.radius_ = 4.f;
 
-	ImGui::Text("Ore Circle center = { x %f,z %f }", circle_.center_.x, circle_.center_.y);
-	ImGui::Text("Ore Circle radius = %f", circle_.radius_);
-	ImGui::Text("Ore Position = { x %f,y %f,z %f", transform_.position_.x, transform_.position_.y, transform_.position_.z);
+	//ImGui::Text("Ore Circle center = { x %f,z %f }", circle_.center_.x, circle_.center_.y);
+	//ImGui::Text("Ore Circle radius = %f", circle_.radius_);
+	//ImGui::Text("Ore Position = { x %f,y %f,z %f", transform_.position_.x, transform_.position_.y, transform_.position_.z);
 }
 
 void Ore::Draw()
