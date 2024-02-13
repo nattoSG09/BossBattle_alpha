@@ -8,7 +8,9 @@ Stage::Stage(GameObject* _pParent)
 
 void Stage::Initialize()
 {
-	hModel_ = Model::Load("Models/leafy_grass_stage.fbx");
+	hModel_ = Model::Load("Models/forest_ground_02.fbx");
+	transform_.rotate_.y = 180.f;
+	//transform_.scale_ = { 2.f,2.f,2.f };
 }
 
 void Stage::Update()
