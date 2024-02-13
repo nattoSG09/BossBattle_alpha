@@ -1,10 +1,12 @@
 #include "TestScene.h"
 #include "Engine/ImGui/imgui.h"
 #include "Engine/Camera.h"
+
 #include<iostream>
 #include "Stage.h"
 #include "Player.h"
 #include "Ore.h"
+#include "SkySphere.h"
 
 TestScene::TestScene(GameObject * parent)
 	: GameObject(parent, "TestScene")
@@ -35,6 +37,9 @@ void TestScene::Initialize()
 
 		// ステージ
 		Instantiate<Stage>(this);
+
+		// 空
+		Instantiate<SkySphere>(this);
 	}
 }
 

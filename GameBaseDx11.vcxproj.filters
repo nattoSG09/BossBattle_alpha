@@ -156,9 +156,8 @@
     <ClCompile Include="State.cpp">
       <Filter>Game\Objects\Player\State</Filter>
     </ClCompile>
-    <ClCompile Include="Ore.cpp">
-      <Filter>Game\Objects</Filter>
-    </ClCompile>
+    <ClCompile Include="Ore.cpp" />
+    <ClCompile Include="SkySphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -279,9 +278,8 @@
     <ClInclude Include="State.h">
       <Filter>Game\Objects\Player\State</Filter>
     </ClInclude>
-    <ClInclude Include="Ore.h">
-      <Filter>Game\Objects</Filter>
-    </ClInclude>
+    <ClInclude Include="Ore.h" />
+    <ClInclude Include="SkySphere.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

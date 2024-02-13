@@ -160,6 +160,7 @@
     <ClCompile Include="FanSector.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Standby.cpp" />
     <ClCompile Include="State.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="FanSector.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="SkySphere.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Standby.h" />
     <ClInclude Include="State.h" />
