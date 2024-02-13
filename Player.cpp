@@ -1,118 +1,51 @@
 #include "Player.h"
-#include "Engine/ImGui/imgui.h"
-
 #include "Engine/Model.h"
+
+// 状態インスタンス
+#include "Waiting.h"
 #include "Engine/Input.h"
 
-#include "State.h"
-#include "Standby.h"
-#include "Ore.h"
-
 Player::Player(GameObject* _pParent)
-	:GameObject(_pParent,"Player")
+	:GameObject(_pParent,"Player"),currentState_(nullptr),states_()
 {
 }
 
 void Player::Initialize()
 {
-	hModel_ = Model::Load("Models/Player/Walking.fbx");
-	// Model::SetAnimFrame(hModel_, 0, 70, 1);
+	// すべての状態インスタンスを配列に確保
+	states_[S_WAIT] = new Waiting;
 
-
-	// 考えられうる状態を保持
-	InitAllStates();
-	ChangeState("Standby");
+	// 最初の状態を「待機」に変更
+	ChangeState(S_WAIT);
 }
 
 void Player::Update()
 {
-	// 現在の状態の更新処理
-	if (currentState_ != nullptr)currentState_->Update();
-
-	// どの状態時でも行う処理
-	{
-		
-	}
-
-	// debug
-	ImGui::Text("Player Position = { x %f,y %f,z %f", transform_.position_.x, transform_.position_.y, transform_.position_.z);
-
-	bool isAnim = false;
-	{// 移動処理 // 
-
-		// 「W」キーが押されたら...
-		if (Input::IsKey(DIK_W)) {
-			// 画面「奥」方向に進む
-			transform_.rotate_.y = 0;
-			transform_.position_.z += 0.1f;
-			isAnim = true;
-		}
-		// 「A」キーが押されたら...
-		if (Input::IsKey(DIK_A)) {
-			// 画面「左」方向に進む
-			transform_.rotate_.y = -90;
-			transform_.position_.x -= 0.1f;
-			isAnim = true;
-		}
-		// 「S」キーが押されたら...
-		if (Input::IsKey(DIK_S)) {
-			// 画面「手前」方向に進む
-			transform_.rotate_.y = 180;
-			transform_.position_.z -= 0.1f;
-			isAnim = true;
-		}
-		// 「D」キーが押されたら...
-		if (Input::IsKey(DIK_D)) {
-			// 画面「右」方向に進む
-			transform_.rotate_.y = 90;
-			transform_.position_.x += 0.1f;
-			isAnim = true;
-		}
-
-		static bool prevAnim = false;
-		if (isAnim == true) {
-			if(prevAnim == false)Model::SetAnimFrame(hModel_, 0, 60, 1);
-			prevAnim = true;
-		}
-		else {
-			Model::SetAnimFrame(hModel_, 0, 0, 0);
-			prevAnim = false;
-		}
-	}
-
-	{// 採掘を行う
-		Ore* ore = (Ore*)FindObject("Ore");
-		if (ore != nullptr) {
-			// 範囲内かつ、スペースキーを押したら...
-			if (ore->GetCircle().ContainsPoint(transform_.position_.x, transform_.position_.z)) {
-				ImGui::Text("mining ok");
-				if(Input::IsKeyDown(DIK_SPACE))ore->KillMe();
-			}
-		}
-	}
+	// 各状態ごとの更新
+	currentState_->Update(this);
 }
 
 void Player::Draw()
 {
-	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
 }
 
 void Player::Release()
 {
 }
 
-void Player::InitAllStates()
+bool Player::IsStateChange(STATE_HANDLE _hState)
 {
-	states_["Standby"] = new Standby;
+	switch (_hState)
+	{
+	case S_WAIT:return true;
+	case S_MOVE:return Input::IsKeyDown(DIK_W) || Input::IsKeyDown(DIK_A) || Input::IsKeyDown(DIK_S) || Input::IsKeyDown(DIK_D);
 
-	for (auto state : states_) {
-		state.second->Initialize();
 	}
+	return false;
 }
 
-void Player::ChangeState(string _key)
+void Player::ChangeState(STATE_HANDLE _hState)
 {
-	currentState_ = states_[_key];
-	currentState_->Start();
+	currentState_ = states_[_hState];
+	currentState_->Start(this);
 }

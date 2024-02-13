@@ -1,11 +1,11 @@
 #pragma once
 
-// ó‘ÔŠî’êƒNƒ‰ƒX
+class Player;
+
 class State
 {
 public:
-	virtual void Initialize() = 0;
-	virtual void Start() = 0;
-	virtual void Update() = 0;
+	virtual void Start(Player* _pPlayer) = 0;
+	virtual void Update(Player* _pPlayer) = 0;
 };
 

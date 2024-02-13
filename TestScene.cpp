@@ -33,7 +33,6 @@ void TestScene::Initialize()
 			ore->SetPosition(rand() % 20 + 1, 0, rand() % 20 + 1);
 		}
 
-
 		// ステージ
 		Instantiate<Stage>(this);
 
@@ -53,7 +52,6 @@ void TestScene::Update()
 	}
 
 	Camera::SetTarget(player_->GetPosition());
-
 }
 
 void TestScene::Draw()

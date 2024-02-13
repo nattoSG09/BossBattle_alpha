@@ -39,8 +39,20 @@
     <Filter Include="Game\Objects\Player">
       <UniqueIdentifier>{02a8e0da-764d-4a18-a099-e1e773bdc255}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Objects\Ore">
+      <UniqueIdentifier>{a65908b8-9367-46a6-b08d-33352b4f201c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Objects\SkySqhere">
+      <UniqueIdentifier>{ce622fa7-e561-4cfc-b678-ac12fdef233e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Objects\Stage">
+      <UniqueIdentifier>{f64ae81c-dba4-4fba-a839-4619c07d3cde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Others">
+      <UniqueIdentifier>{42f989f1-f5e9-4eb4-81a8-03a1fb154dab}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Game\Objects\Player\State">
-      <UniqueIdentifier>{9fb6e2fa-ea61-46a3-955f-e15ca718274b}</UniqueIdentifier>
+      <UniqueIdentifier>{160b030e-b250-4300-8fcf-b4cb33dfde39}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,35 +146,44 @@
     <ClCompile Include="Engine\ImGui\imgui_widgets.cpp">
       <Filter>01Engine\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Circle.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="FanSector.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Rect.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Stage.cpp">
-      <Filter>Game\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game\Objects\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Standby.cpp">
-      <Filter>Game\Objects\Player\State</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Game\Objects\Player\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Ore.cpp" />
-    <ClCompile Include="SkySphere.cpp" />
     <ClCompile Include="Engine\Transition.cpp">
       <Filter>01Engine</Filter>
     </ClCompile>
     <ClCompile Include="LoadScene.cpp">
       <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Ore.cpp">
+      <Filter>Game\Objects\Ore</Filter>
+    </ClCompile>
+    <ClCompile Include="SkySphere.cpp">
+      <Filter>Game\Objects\SkySqhere</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Game\Objects\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Game\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Game\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="FanSector.cpp">
+      <Filter>Game\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Game\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Game\Objects\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Waiting.cpp">
+      <Filter>Game\Objects\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Moving.cpp">
+      <Filter>Game\Objects\Player\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,35 +283,44 @@
     <ClInclude Include="Engine\ImGui\imstb_truetype.h">
       <Filter>01Engine\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Circle.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="FanSector.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="Rect.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>Game\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game\Objects\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Standby.h">
-      <Filter>Game\Objects\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Game\Objects\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Ore.h" />
-    <ClInclude Include="SkySphere.h" />
     <ClInclude Include="Engine\Transition.h">
       <Filter>01Engine</Filter>
     </ClInclude>
     <ClInclude Include="LoadScene.h">
       <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Ore.h">
+      <Filter>Game\Objects\Ore</Filter>
+    </ClInclude>
+    <ClInclude Include="SkySphere.h">
+      <Filter>Game\Objects\SkySqhere</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Game\Objects\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Game\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Game\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="FanSector.h">
+      <Filter>Game\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Game\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Game\Objects\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Waiting.h">
+      <Filter>Game\Objects\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Moving.h">
+      <Filter>Game\Objects\Player\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

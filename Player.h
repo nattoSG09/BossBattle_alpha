@@ -2,16 +2,18 @@
 #include "Engine/GameObject.h"
 #include <map>
 using std::map;
-using std::string;
+
+
+enum STATE_HANDLE {
+	S_WAIT,S_MOVE
+};
 
 class State;
 
 class Player : public GameObject
 {
-	int hModel_;
-	map<string,State*> states_;
+	map<STATE_HANDLE, State*> states_;
 	State* currentState_;
-
 public:
 	Player(GameObject* _pParent);
 	void Initialize() override;
@@ -19,8 +21,7 @@ public:
 	void Draw() override;
 	void Release() override;
 
-	void InitAllStates();
-	void ChangeState(string _key);
-
+	bool IsStateChange(STATE_HANDLE _hState);
+	void ChangeState(STATE_HANDLE _hState);
 };
 

@@ -14,7 +14,7 @@ void LoadScene::Initialize()
 void LoadScene::Update()
 {
 	//if (ImGui::Button("SceneChange")) {
-		((SceneManager*)FindObject("SceneManager"))->ChangeScene(SCENE_ID_TEST, TID_BLACKOUT, 2.f);
+	((SceneManager*)FindObject("SceneManager"))->ChangeScene(SCENE_ID_TEST, TID_BLACKOUT, 2.f);
 	//}
 }
 
