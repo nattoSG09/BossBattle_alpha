@@ -127,6 +127,8 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Engine\Transition.cpp" />
+    <ClCompile Include="LoadScene.cpp" />
     <ClCompile Include="Ore.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
     <ClCompile Include="Engine\BillBoard.cpp" />
@@ -169,6 +171,8 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="Engine\Transition.h" />
+    <ClInclude Include="LoadScene.h" />
     <ClInclude Include="Ore.h" />
     <ClInclude Include="Engine\Audio.h" />
     <ClInclude Include="Engine\BillBoard.h" />

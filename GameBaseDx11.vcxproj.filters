@@ -158,6 +158,12 @@
     </ClCompile>
     <ClCompile Include="Ore.cpp" />
     <ClCompile Include="SkySphere.cpp" />
+    <ClCompile Include="Engine\Transition.cpp">
+      <Filter>01Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -280,6 +286,12 @@
     </ClInclude>
     <ClInclude Include="Ore.h" />
     <ClInclude Include="SkySphere.h" />
+    <ClInclude Include="Engine\Transition.h">
+      <Filter>01Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Ore.h"
 #include "SkySphere.h"
+#include "Engine/SceneManager.h"
 
 TestScene::TestScene(GameObject * parent)
 	: GameObject(parent, "TestScene")
@@ -16,9 +17,6 @@ TestScene::TestScene(GameObject * parent)
 void TestScene::Initialize()
 {	
 
-	// カメラの設定
-	Camera::SetPosition(XMFLOAT3(0, 10, -20));
-	Camera::SetTarget(XMFLOAT3(0, 7, 0));
 	// 作りたいゲーム・・・ない
 
 	// 乱数の初期化
@@ -27,7 +25,7 @@ void TestScene::Initialize()
 	// 必要なGameObject
 	{
 		// プレイヤー
-		Instantiate<Player>(this);
+		player_ = Instantiate<Player>(this);
 
 		// 鉱石
 		for (int i = 0; i < 3; i++) {
@@ -35,17 +33,27 @@ void TestScene::Initialize()
 			ore->SetPosition(rand() % 20 + 1, 0, rand() % 20 + 1);
 		}
 
+
 		// ステージ
 		Instantiate<Stage>(this);
 
 		// 空
 		Instantiate<SkySphere>(this);
 	}
+
+	// カメラの設定
+	Camera::SetPosition(XMFLOAT3(0, 10, -20));
+	Camera::SetTarget(XMFLOAT3(0, 7, 0));
 }
 
 void TestScene::Update()
 {
-	
+	if (player_->GetPosition().z >= 25.f) {
+		((SceneManager*)FindObject("SceneManager"))->ChangeScene(SCENE_ID_LOAD, TID_BLACKOUT, 1.f);
+	}
+
+	Camera::SetTarget(player_->GetPosition());
+
 }
 
 void TestScene::Draw()

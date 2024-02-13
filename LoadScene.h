@@ -1,16 +1,14 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-class Player;
-
-
-class TestScene : public GameObject
+class LoadScene : public GameObject
 {
-	Player* player_;
 public:
-	TestScene(GameObject* parent);
+	LoadScene(GameObject* _pParent);
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Release() override;
+
 };
+

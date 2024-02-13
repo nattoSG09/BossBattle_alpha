@@ -23,6 +23,7 @@
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_dx11.h"
 #include "ImGui/imgui_impl_win32.h"
+#include "Transition.h"
 
 #pragma comment(lib,"Winmm.lib")
 
@@ -74,6 +75,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//入力処理（キーボード、マウス、コントローラー）の準備
 	Input::Initialize(hWnd);
+
+	// トランジション処理の準備
+	Transition::Initialize();
 
 	//オーディオ（効果音）の準備
 	Audio::Initialize();
@@ -129,7 +133,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				FPS++;						//画面更新回数をカウントする
 
 
-
+				// トランジションの更新
+				Transition::Update();
 
 				//入力（キーボード、マウス、コントローラー）情報を更新
 				Input::Update();
@@ -152,13 +157,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//このフレームの描画開始
 				Direct3D::BeginDraw();
 
+				
 				//全オブジェクトを描画
 				//ルートオブジェクトのDrawを呼んだあと、自動的に子、孫のUpdateが呼ばれる
 				pRootObject->DrawSub();
 
+
 				//エフェクトの描画
 				VFX::Draw();
 
+				// トランジションの描画
+				Transition::Draw();
 
 				ImGui::Render();
 				ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
@@ -181,6 +190,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Audio::AllRelease();
 	Model::AllRelease();
 	Image::AllRelease();
+	Transition::Release();
 	pRootObject->ReleaseSub();
 	SAFE_DELETE(pRootObject);
 	Direct3D::Release();
