@@ -79,7 +79,6 @@ void Player::Update()
                 }
             }
         }
-
         ImGui::Text("isMining = %s", isMining ? "true" : "false");
     }
 }
