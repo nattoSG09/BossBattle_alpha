@@ -30,29 +30,29 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	//// 移動の設定
-	//{
- //       // 「W」キーが押されたら...
- //       if (Input::IsKey(DIK_W)) {
- //           // 画面「奥」方向に進む
- //           transform_.position_.z += 0.1f;
- //       }
- //       // 「A」キーが押されたら...
- //       if (Input::IsKey(DIK_A)) {
- //           // 画面「左」方向に進む
- //           transform_.position_.x -= 0.1f;
- //       }
- //       // 「S」キーが押されたら...
- //       if (Input::IsKey(DIK_S)) {
- //           // 画面「手前」方向に進む
- //           transform_.position_.z -= 0.1f;
- //       }
- //       // 「D」キーが押されたら...
- //       if (Input::IsKey(DIK_D)) {
- //           // 画面「右」方向に進む
- //           transform_.position_.x += 0.1f;
- //       }
-	//}
+	// 移動の設定
+	{
+        // 「W」キーが押されたら...
+        if (Input::IsKey(DIK_W)) {
+            // 画面「奥」方向に進む
+            transform_.position_.z += 0.1f;
+        }
+        // 「A」キーが押されたら...
+        if (Input::IsKey(DIK_A)) {
+            // 画面「左」方向に進む
+            transform_.position_.x -= 0.1f;
+        }
+        // 「S」キーが押されたら...
+        if (Input::IsKey(DIK_S)) {
+            // 画面「手前」方向に進む
+            transform_.position_.z -= 0.1f;
+        }
+        // 「D」キーが押されたら...
+        if (Input::IsKey(DIK_D)) {
+            // 画面「右」方向に進む
+            transform_.position_.x += 0.1f;
+        }
+	}
 
 	// カメラの設定
 	{
@@ -75,11 +75,11 @@ void Player::Update()
 
 			// ３．正規化したベクトルＢを回転行列をもとに回転させる
 			// 例）Y軸に９０度回転
-			XMMATRIX rotateMatrix = XMMatrixRotationX(XMConvertToRadians(mouseMove.y /sensitivity)) * XMMatrixRotationY(XMConvertToRadians(mouseMove.x / sensitivity));
+			XMMATRIX rotateMatrix = XMMatrixRotationX(-XMConvertToRadians(mouseMove.y /sensitivity)) * XMMatrixRotationY(XMConvertToRadians(mouseMove.x / sensitivity));
 			XMVECTOR rotatedPlayerToCameraVec = XMVector3Transform(nom_playerToCameraVec, rotateMatrix);
 
 			// ４．回転後にベクトルＢにplayerToCameraVecの長さを掛ける
-			rotatedPlayerToCameraVec *= XMVectorGetX(XMVector3Length(playerToCameraVec));
+			rotatedPlayerToCameraVec *= 3.f;
 
 			// ５．プレイヤーの位置とベクトルＢを足して、回転後のカメラの位置に伸びるベクトルＣを作成
 			rotatedPlayerToCameraVec = rotatedPlayerToCameraVec + XMLoadFloat3(&transform_.position_);
@@ -88,7 +88,7 @@ void Player::Update()
 			XMStoreFloat3(&cameraPosition, rotatedPlayerToCameraVec);
 
 			Camera::SetPosition(cameraPosition);
-
+			Camera::SetTarget(transform_.position_);
 		}
 		ImGui::End();
 	}
