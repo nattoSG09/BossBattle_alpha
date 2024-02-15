@@ -4,6 +4,7 @@
 class Player : public GameObject
 {
 	int hModel_;
+	XMFLOAT3 initCamPos;
 public:
 	Player(GameObject* _pParent);
 	void Initialize() override;
