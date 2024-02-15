@@ -99,7 +99,7 @@ void Player::Update()
         ImGui::Text("mouseMove = (%f,%f,%f),", mouseMove.x, mouseMove.y, mouseMove.z);
 
         XMFLOAT3 cameraTarget = transform_.position_;
-        cameraTarget.y += 5.0f;
+        cameraTarget.y += 4.0f;
 
         if (mouseMove.x >= 0 || mouseMove.y >= 0) {
 
