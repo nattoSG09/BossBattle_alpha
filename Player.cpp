@@ -8,7 +8,9 @@
 #include "Engine/Camera.h"
 
 namespace {
-    const float sensitivity = 5.f;
+    const float sensitivity = 0.5f;// マウス感度
+    const float playerCameraDistance = 10.f;
+    const float playerHeadHeight = 4.f;
 }
 
 Player::Player(GameObject* _pParent)
@@ -90,45 +92,68 @@ void Player::Update()
 
     // カメラの設定
     {
-        XMFLOAT3 cameraPosition = Camera::GetPosition();
-        ImGui::Begin("Camera");
-        ImGui::Text("start_cameraPos = (%f,%f,%f),", initCamPos.x, initCamPos.y, initCamPos.z);
-        ImGui::Text("rotated_cameraPos = (%f,%f,%f),", cameraPosition.x, cameraPosition.y, cameraPosition.z);
+        // プレイヤーの頭部の位置を設定
+        XMFLOAT3 playerHead_position = transform_.position_;
+        playerHead_position.y += playerHeadHeight;
 
+        // マウスの情報を取得
         XMFLOAT3 mouseMove = Input::GetMouseMove();
-        ImGui::Text("mouseMove = (%f,%f,%f),", mouseMove.x, mouseMove.y, mouseMove.z);
 
-        XMFLOAT3 cameraTarget = transform_.position_;
-        cameraTarget.y += 4.0f;
+        // カメラの位置の回転
+        XMFLOAT3 camera_position = Camera::GetPosition();
+        {
+            
+            // 正規化済みの向きベクトルを用意
+            XMVECTOR player_To_camPos = XMLoadFloat3(&camera_position) - XMLoadFloat3(&playerHead_position);
+            player_To_camPos = XMVector3Normalize(player_To_camPos);
 
-        if (mouseMove.x >= 0 || mouseMove.y >= 0) {
+            // 回転行列をマウスの移動量を基に作成
+            XMMATRIX matRotate = 
+                XMMatrixRotationX(XMConvertToRadians(mouseMove.y * sensitivity)) * XMMatrixRotationY(XMConvertToRadians(mouseMove.x * sensitivity));
 
-            initCamPos = cameraPosition;
-            // １．カメラの位置からプレイヤーの位置引いて、２点を結ぶplayerToCameraVecを作成する
-            XMVECTOR playerToCameraVec = XMLoadFloat3(&cameraPosition) - XMLoadFloat3(&cameraTarget);
+            // 回転行列を掛けて、向きベクトルを回転
+            player_To_camPos = XMVector3Transform(player_To_camPos, matRotate);
 
-            // ２．ベクトルＡを正規化し長さを１にし、向きベクトルＢとする
-            XMVECTOR nom_playerToCameraVec = XMVector3Normalize(playerToCameraVec);
+            // 長さを変更
+            player_To_camPos *= playerCameraDistance;
 
-            // ３．正規化したベクトルＢを回転行列をもとに回転させる
-            // 例）Y軸に９０度回転
-            XMMATRIX rotateMatrix = XMMatrixRotationX(-XMConvertToRadians(mouseMove.y / sensitivity)) * XMMatrixRotationY(XMConvertToRadians(mouseMove.x / sensitivity));
-            XMVECTOR rotatedPlayerToCameraVec = XMVector3Transform(nom_playerToCameraVec, rotateMatrix);
-
-            // ４．回転後にベクトルＢにplayerToCameraVecの長さを掛ける
-            rotatedPlayerToCameraVec *= 10.f;
-
-            // ５．プレイヤーの位置とベクトルＢを足して、回転後のカメラの位置に伸びるベクトルＣを作成
-            rotatedPlayerToCameraVec = rotatedPlayerToCameraVec + XMLoadFloat3(&cameraTarget);
-
-            // ６．ベクトルＣをXMStoreFloat3()で位置に変換すればカメラの位置を求めることができるはず
-            XMStoreFloat3(&cameraPosition, rotatedPlayerToCameraVec);
+            // 原点０，０から回転後のカメラの位置に伸びるベクトルを作成し、位置に代入
+            XMVECTOR origin_To_camPos = player_To_camPos + XMLoadFloat3(&playerHead_position);
+            XMStoreFloat3(&camera_position, origin_To_camPos);
 
         }
-        Camera::SetPosition(cameraPosition);
-        Camera::SetTarget(cameraTarget);
 
-        ImGui::End();
+        // カメラの焦点の回転
+        XMFLOAT3 camera_target = Camera::GetTarget();
+        {
+
+            // 正規化済みの向きベクトルを用意
+            XMVECTOR player_To_camPos = XMLoadFloat3(&camera_target) - XMLoadFloat3(&playerHead_position);
+            player_To_camPos = XMVector3Normalize(player_To_camPos);
+
+            // 回転行列をマウスの移動量を基に作成
+            XMMATRIX matRotate =
+                XMMatrixRotationX(XMConvertToRadians(mouseMove.y * sensitivity) + 45.f) * XMMatrixRotationY(XMConvertToRadians(mouseMove.x * sensitivity) + 45.f);
+
+            // 回転行列を掛けて、向きベクトルを回転
+            player_To_camPos = XMVector3Transform(player_To_camPos, matRotate);
+
+            // 長さを変更
+            player_To_camPos *= playerCameraDistance;
+
+            // 原点０，０から回転後のカメラの位置に伸びるベクトルを作成し、位置に代入
+            XMVECTOR origin_To_camPos = player_To_camPos + XMLoadFloat3(&playerHead_position);
+            XMStoreFloat3(&camera_target, origin_To_camPos);
+
+        }
+
+        Camera::SetPosition(camera_position);
+
+        // 焦点が頭部の時はうまくいく。
+        //Camera::SetTarget(playerHead_position);
+
+        Camera::SetTarget(camera_target);
+
     }
 }
 
