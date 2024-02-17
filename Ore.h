@@ -14,5 +14,6 @@ public:
 	void Release() override;
 
 	Circle GetCircle() { return circle_; }
+	int GetModelHandle() { return hModel_; }
 };
 

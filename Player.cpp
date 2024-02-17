@@ -102,12 +102,6 @@ void Player::Update()
         // 正規化した視線ベクトルを取得
         XMVECTOR moveDir = XMVector3Normalize(Camera::GetSightline());
 
-        // Y方向への移動を制限したいので、Y要素を０にする
-        moveDir = XMVectorSetY(moveDir, 0);
-        
-        // スピードを乗算
-        moveDir *= speed;
-        
         // debug
         {
             XMFLOAT3 mdf = {
@@ -117,6 +111,13 @@ void Player::Update()
             };
             ImGui::Text("moveDir = %f,%f,%f", mdf.x, mdf.y, mdf.z);
         }
+
+        // Y方向への移動を制限したいので、Y要素を０にする
+        moveDir = XMVectorSetY(moveDir, 0);
+        
+        // スピードを乗算
+        moveDir *= speed;
+        
         
         // 移動方向ベクトルを用意
         XMVECTOR move{0,0,0,0};
@@ -189,19 +190,7 @@ void Player::Update()
 
     // 採掘処理
     {
-        bool isMining = false;
-        Ore* ore = (Ore*)FindObject("Ore");
-        if (ore != nullptr) {
-            if (ore->GetCircle().ContainsPoint(transform_.position_.x, transform_.position_.z)) {
-                
-                isMining = true;
-                if (Input::IsKeyDown(DIK_SPACE)) {
-                    ore->KillMe();
-                    isMining = false;
-                }
-            }
-        }
-        ImGui::Text("isMining = %s", isMining ? "true" : "false");
+        Mining();
     }
 
     // カメラの設定
@@ -250,4 +239,38 @@ void Player::Draw()
 
 void Player::Release()
 {
+}
+
+void Player::Mining()
+{
+    // 鉱石の情報を取得
+    Ore* ore = (Ore*)FindObject("Ore");
+    if (ore == nullptr)return;
+
+    // 視線ベクトルを取得
+    XMVECTOR sightline = XMVector3Normalize(Camera::GetSightline());
+
+    // レイキャストを発射
+    RayCastData sightRay; {
+        XMStoreFloat3(&sightRay.dir, sightline);
+        sightRay.start = Camera::GetPosition();
+        Model::RayCast(ore->GetModelHandle(), &sightRay);
+
+        // debug
+        ImGui::Text("sightRay.hit = %s", sightRay.hit ? "true" : "false");
+    }
+
+    // 採掘可能かどうか
+    bool isMining = false;
+    if (ore->GetCircle().ContainsPoint(transform_.position_.x, transform_.position_.z)
+        && sightRay.hit) {
+
+        isMining = true;
+        if (Input::IsMouseButtonDown(0)) {
+            ore->KillMe();
+            isMining = false;
+        }
+    }
+    ImGui::Text("isMining = %s", isMining ? "true" : "false");
+
 }

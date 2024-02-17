@@ -12,5 +12,7 @@ public:
 	void Draw() override;
 	void Release() override;
 
+private:
+	void Mining();
 };
 

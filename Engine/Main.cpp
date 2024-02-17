@@ -29,7 +29,9 @@
 
 //定数宣言
 const char* WIN_CLASS_NAME = "SampleGame";	//ウィンドウクラス名
-
+bool isFullscreen = false;
+LONG_PTR g_windowStyle;
+RECT winRect;
 
 //プロトタイプ宣言
 HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdShow);
@@ -219,7 +221,7 @@ HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdSho
 	RegisterClassEx(&wc);
 
 	//ウィンドウサイズの計算
-	RECT winRect = { 0, 0, screenWidth, screenHeight };
+	winRect = { 0, 0, screenWidth, screenHeight };
 	AdjustWindowRect(&winRect, WS_OVERLAPPEDWINDOW, FALSE);
 
 	//タイトルバーに表示する内容
@@ -247,17 +249,53 @@ HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdSho
 	return hWnd;
 }
 
+void ToggleFullscreen(HWND hwnd)
+{
+	isFullscreen = !isFullscreen;
+
+	if (isFullscreen)
+	{
+		g_windowStyle = GetWindowLongPtr(hwnd, GWL_STYLE);
+		// ウィンドウスタイルをフルスクリーンに変更d
+		SetWindowLong(hwnd, GWL_STYLE, WS_POPUP | WS_VISIBLE);
+		// ウィンドウサイズをディスプレイの解像度に合わせる
+		SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+	}
+	else
+	{
+		// ウィンドウスタイルを通常のウィンドウに戻す
+		SetWindowLong(hwnd, GWL_STYLE, g_windowStyle);
+		// ウィンドウサイズを元に戻す
+		SetWindowPos(hwnd, HWND_NOTOPMOST, winRect.left, winRect.top, winRect.right - winRect.left, winRect.bottom - winRect.top, SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+	}
+}
+
+
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND _hWnd, UINT _msg, WPARAM _wParam, LPARAM _lParam);
 
 //ウィンドウプロシージャ（何かあった時によばれる関数）
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	static BOOL isCursorVisible = TRUE;
+
 	switch (msg)
 	{
 	//ウィンドウを閉じた
 	case WM_DESTROY:
 		PostQuitMessage(0);	//プログラム終了
 		return 0;
+
+
+	case WM_KEYDOWN:
+		// キーが押されたら、マウスカーソルの可視性を切り替える
+		if (wParam == VK_F3) {
+			isCursorVisible = !isCursorVisible;
+			ShowCursor(isCursorVisible);
+		}
+		else if (wParam == VK_F11)
+		{
+			ToggleFullscreen(hWnd);
+		}
 
 	//マウスが動いた
 	case WM_MOUSEMOVE:
