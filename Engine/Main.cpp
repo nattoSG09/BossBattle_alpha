@@ -292,10 +292,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			isCursorVisible = !isCursorVisible;
 			ShowCursor(isCursorVisible);
 		}
-		else if (wParam == VK_F11)
-		{
-			ToggleFullscreen(hWnd);
+		else if (wParam == VK_F11)ToggleFullscreen(hWnd);
+		
+		else if (wParam == VK_ESCAPE) {
+			if(MessageBox(NULL, "ゲームを終了しますか？", "終了", MB_YESNO) == IDYES)
+			PostQuitMessage(0);	//プログラム終了
 		}
+
 
 	//マウスが動いた
 	case WM_MOUSEMOVE:
