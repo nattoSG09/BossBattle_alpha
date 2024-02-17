@@ -11,6 +11,10 @@ void Stage::Initialize()
 	hModel_ = Model::Load("Models/forest_ground_02.fbx");
 	transform_.rotate_.y = 180.f;
 	//transform_.scale_ = { 2.f,2.f,2.f };
+
+	exitRect_.center_ = { 0.f,27.5f };
+	exitRect_.height_ = 4.f;
+	exitRect_.width_ = 16.f;
 }
 
 void Stage::Update()

@@ -34,7 +34,7 @@ void TestScene::Initialize()
 		}
 
 		// ステージ
-		Instantiate<Stage>(this);
+		pStage_ = Instantiate<Stage>(this);
 
 		// 空
 		Instantiate<SkySphere>(this);
@@ -47,11 +47,13 @@ void TestScene::Initialize()
 
 void TestScene::Update()
 {
-	if (player_->GetPosition().z >= 25.f) {
+	XMFLOAT3 playerPos = player_->GetPosition();
+	if (pStage_->GetExitRect().ContainsPoint(playerPos.x, playerPos.z)) {
+		ImGui::Text("exit ok");
 		((SceneManager*)FindObject("SceneManager"))->ChangeScene(SCENE_ID_LOAD, TID_BLACKOUT, 1.f);
+
 	}
 
-	Camera::SetTarget(player_->GetPosition());
 }
 
 void TestScene::Draw()

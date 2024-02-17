@@ -26,6 +26,8 @@ namespace Camera
 	//焦点を取得
 	XMFLOAT3 GetTarget();
 
+	XMVECTOR GetSightline();
+
 	//ビュー行列を取得
 	XMMATRIX GetViewMatrix();
 
