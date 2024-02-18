@@ -7,7 +7,8 @@
 #include "Model.h"
 #include "Image.h"
 #include "Audio.h"
-
+#include "Texture.h"
+#include "ImGui/imgui.h"
 
 //コンストラクタ
 SceneManager::SceneManager(GameObject * parent)
@@ -18,6 +19,12 @@ SceneManager::SceneManager(GameObject * parent)
 //初期化
 void SceneManager::Initialize()
 {
+	testTexture_ = new Texture;
+	testTexture_->Load("TestScene.png");
+
+	loadTexture_ = new Texture;
+	loadTexture_->Load("Miner'sHope_Images/title_color01.png");
+
 	//最初のシーンを準備
 	currentSceneID_ = SCENE_ID_TEST;
 	nextSceneID_ = currentSceneID_;
@@ -27,6 +34,16 @@ void SceneManager::Initialize()
 //更新
 void SceneManager::Update()
 {
+	ImGui::Begin("Scene");
+	if (ImGui::ImageButton(testTexture_->GetSRV(), ImVec2(testTexture_->GetSize().x / 10, testTexture_->GetSize().y / 10))) {
+		ChangeScene(SCENE_ID_TEST, TID_BLACKOUT, 1.f);
+	}
+	if (ImGui::ImageButton(loadTexture_->GetSRV(), ImVec2(loadTexture_->GetSize().x / 10, loadTexture_->GetSize().y / 10))) {
+		ChangeScene(SCENE_ID_LOAD, TID_BLACKOUT, 1.f);
+
+	}
+	ImGui::End();
+
 	//トランジション実行時、シーン切替のタイミングでシーンを変更する
 	if (Transition::IsChangePoint())nextSceneID_ = tmpID_;
 

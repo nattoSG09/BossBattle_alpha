@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "Transition.h"
 
+class Texture;
+
 //ゲームに登場するシーン
 enum SCENE_ID
 {
@@ -15,7 +17,8 @@ enum SCENE_ID
 //-----------------------------------------------------------
 class SceneManager : public GameObject
 {
-
+	Texture* testTexture_;
+	Texture* loadTexture_;
 public:
 	//コンストラクタ
 	//引数：parent	親オブジェクト（基本的にゲームマネージャー）
