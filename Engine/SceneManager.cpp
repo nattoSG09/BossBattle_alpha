@@ -40,6 +40,7 @@ void SceneManager::Update()
 	if (ImGui::ImageButton(testTexture_->GetSRV(), ImVec2(testTexture_->GetSize().x / 10, testTexture_->GetSize().y / 10))) {
 		ChangeScene(SCENE_ID_TEST, TID_BLACKOUT, 1.f);
 	}
+
 	ImGui::Text("LoadScene");
 	if (ImGui::ImageButton(loadTexture_->GetSRV(), ImVec2(loadTexture_->GetSize().x / 10, loadTexture_->GetSize().y / 10))) {
 		ChangeScene(SCENE_ID_LOAD, TID_BLACKOUT, 1.f);
