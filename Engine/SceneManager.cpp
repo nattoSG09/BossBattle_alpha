@@ -31,6 +31,7 @@ void SceneManager::Initialize()
 	Instantiate<TestScene>(this);
 }
 
+
 //XV
 void SceneManager::Update()
 {
