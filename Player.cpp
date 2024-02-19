@@ -9,7 +9,7 @@
 
 namespace {
     const float sensitivity = 0.5f;// マウス感度
-    const float playerCameraDistance = 5.f;
+    const float playerCameraDistance = 10.f;
     const float playerHeadHeight = 3.f;
 
     // 二つのベクトルから角度を求める関数(ラジアン)
@@ -230,17 +230,16 @@ void Player::Update()
 
         // ===== カメラの焦点の回転 =====
         XMFLOAT3 camera_target = Camera::GetPosition();
-
         XMVECTOR origin_To_camTarget = XMLoadFloat3(&playerHead_position) - player_To_camPos;
-        XMStoreFloat3(&camera_target, origin_To_camTarget);
 
+        XMStoreFloat3(&camera_target, origin_To_camTarget);
+        
         ImGui::Text("camera_position = %f,%f,%f", camera_position.x, camera_position.y, camera_position.z);
         ImGui::Text("camera_target = %f,%f,%f", camera_target.x, camera_target.y, camera_target.z);
        
         Camera::SetPosition(camera_position);
         Camera::SetTarget(camera_target);
     }
-
 }
 
 void Player::Draw()
