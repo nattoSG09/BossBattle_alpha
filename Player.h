@@ -4,6 +4,7 @@
 class Player : public GameObject
 {
 	int hModel_;
+	int hModel_point_;
 	XMFLOAT3 initCamPos;
 public:
 	Player(GameObject* _pParent);

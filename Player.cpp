@@ -9,8 +9,8 @@
 
 namespace {
     const float sensitivity = 0.5f;// マウス感度
-    const float playerCameraDistance = 10.f;
-    const float playerHeadHeight = 4.f;
+    const float playerCameraDistance = 5.f;
+    const float playerHeadHeight = 3.f;
 
     // 二つのベクトルから角度を求める関数(ラジアン)
     float AngleBetweenVectors(XMVECTOR& _vec1, XMVECTOR& _vec2) {
@@ -40,6 +40,9 @@ void Player::Initialize()
 	// モデルの読み込み
 	hModel_ = Model::Load("Models/Player/Walking.fbx");
 	assert(hModel_ <= 0);
+
+    hModel_point_ = Model::Load("DebugCollision/Point.fbx");
+    //assert(hModel_point_ <= 0);
 
 }
 
@@ -202,31 +205,40 @@ void Player::Update()
         // マウスの情報を取得
         XMFLOAT3 mouseMove = Input::GetMouseMove();
 
-        // カメラの位置の回転
+        // ===== カメラの位置の回転 =====
         XMFLOAT3 camera_position = Camera::GetPosition();
-        {
             
-            // 正規化済みの向きベクトルを用意
-            XMVECTOR player_To_camPos = XMLoadFloat3(&camera_position) - XMLoadFloat3(&playerHead_position);
-            player_To_camPos = XMVector3Normalize(player_To_camPos);
+        // 正規化済みの向きベクトルを用意
+        XMVECTOR player_To_camPos = XMLoadFloat3(&camera_position) - XMLoadFloat3(&playerHead_position);
+        player_To_camPos = XMVector3Normalize(player_To_camPos);
 
-            // 回転行列をマウスの移動量を基に作成
-            XMMATRIX matRotate = 
-                XMMatrixRotationX(XMConvertToRadians(mouseMove.y * sensitivity)) * XMMatrixRotationY(XMConvertToRadians(mouseMove.x * sensitivity));
+        // 回転行列をマウスの移動量を基に作成
+        XMMATRIX matRotate = 
+            XMMatrixRotationX(XMConvertToRadians(mouseMove.y * sensitivity)) * XMMatrixRotationY(XMConvertToRadians(mouseMove.x * sensitivity));
 
-            // 回転行列を掛けて、向きベクトルを回転
-            player_To_camPos = XMVector3Transform(player_To_camPos, matRotate);
+        // 回転行列を掛けて、向きベクトルを回転
+        player_To_camPos = XMVector3Transform(player_To_camPos, matRotate);
 
-            // 長さを変更
-            player_To_camPos *= playerCameraDistance;
+        // 長さを変更
+        //static float dist = playerCameraDistance;
+        //if(mouseMove.z > 0)dist = mouseMove.z;
+        player_To_camPos *= playerCameraDistance;
 
-            // 原点０，０から回転後のカメラの位置に伸びるベクトルを作成し、位置に代入
-            XMVECTOR origin_To_camPos = player_To_camPos + XMLoadFloat3(&playerHead_position);
-            XMStoreFloat3(&camera_position, origin_To_camPos);
+        // 原点０，０から回転後のカメラの位置に伸びるベクトルを作成し、位置に代入
+        XMVECTOR origin_To_camPos = player_To_camPos + XMLoadFloat3(&playerHead_position);
+        XMStoreFloat3(&camera_position, origin_To_camPos);
 
-        }
+        // ===== カメラの焦点の回転 =====
+        XMFLOAT3 camera_target = Camera::GetPosition();
+
+        XMVECTOR origin_To_camTarget = XMLoadFloat3(&playerHead_position) - player_To_camPos;
+        XMStoreFloat3(&camera_target, origin_To_camTarget);
+
+        ImGui::Text("camera_position = %f,%f,%f", camera_position.x, camera_position.y, camera_position.z);
+        ImGui::Text("camera_target = %f,%f,%f", camera_target.x, camera_target.y, camera_target.z);
+       
         Camera::SetPosition(camera_position);
-        Camera::SetTarget(playerHead_position);
+        Camera::SetTarget(camera_target);
     }
 
 }
@@ -235,6 +247,16 @@ void Player::Draw()
 {
     Model::SetTransform(hModel_, transform_);
     Model::Draw(hModel_);
+
+    // カメラの位置
+    Transform cam;
+    cam.position_ = Camera::GetPosition();
+    Model::SetTransform(hModel_point_, cam);
+    Model::Draw(hModel_point_);
+
+    cam.position_ = Camera::GetTarget();
+    Model::SetTransform(hModel_point_, cam);
+    Model::Draw(hModel_point_);
 }
 
 void Player::Release()

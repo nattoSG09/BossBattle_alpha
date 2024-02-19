@@ -41,7 +41,7 @@ void TestScene::Initialize()
 	}
 
 	// ƒJƒƒ‰‚Ìİ’è
-	Camera::SetPosition(XMFLOAT3(0, 10, -20));
+	Camera::SetPosition(XMFLOAT3(0, 10, -30));
 	Camera::SetTarget(XMFLOAT3(0, 7, 0));
 }
 
