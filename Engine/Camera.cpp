@@ -48,6 +48,11 @@ XMFLOAT3 Camera::GetTarget() { return _target; }
 //位置を取得
 XMFLOAT3 Camera::GetPosition() { return _position; }
 
+XMVECTOR Camera::GetSightline()
+{
+	return XMLoadFloat3(&_target) - XMLoadFloat3(&_position);
+}
+
 //ビュー行列を取得
 XMMATRIX Camera::GetViewMatrix() { return _view; }
 
