@@ -21,4 +21,5 @@ namespace OreManager
 	}
 
 	void Destroy(Ore* _ore);
+	void AllRelease();
 };

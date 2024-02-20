@@ -60,4 +60,5 @@ void TestScene::Draw()
 
 void TestScene::Release()
 {
+	OreManager::AllRelease();
 }
