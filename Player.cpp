@@ -299,7 +299,7 @@ void Player::Mining()
             Model::RayCast(ore->GetModelHandle(), &sightRay);
 
             // debug
-            ImGui::Text("sightRay.hit = %s", sightRay.hit ? "true" : "false");
+            //ImGui::Text("sightRay.hit = %s", sightRay.hit ? "true" : "false");
         }
 
         // ÌŒ@‰Â”\‚©‚Ç‚¤‚©
@@ -320,7 +320,7 @@ void Player::Mining()
                 isMining = false;
             }
         }
-        ImGui::Text("isMining = %s", isMining ? "true" : "false");
-        ImGui::Text("duravity = %d", ore->GetDurability());
+        //ImGui::Text("isMining = %s", isMining ? "true" : "false");
+        //ImGui::Text("duravity = %d", ore->GetDurability());
     }
 }
