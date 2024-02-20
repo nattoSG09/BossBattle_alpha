@@ -10,8 +10,8 @@
 
 namespace {
     const float sensitivity = 0.5f;// マウス感度
-    const float playerCameraDistance = 10.f;
-    const float playerHeadHeight = 3.f;
+    const float playerCameraDistance = 4.f;
+    const float playerHeadHeight = 4.f;
 
     // 二つのベクトルから角度を求める関数(ラジアン)
     float AngleBetweenVectors(XMVECTOR& _vec1, XMVECTOR& _vec2) {
@@ -206,40 +206,63 @@ void Player::Update()
         // マウスの情報を取得
         XMFLOAT3 mouseMove = Input::GetMouseMove();
 
-        // ===== カメラの位置の回転 =====
+        // カメラの位置の回転
         XMFLOAT3 camera_position = Camera::GetPosition();
-            
-        // 正規化済みの向きベクトルを用意
-        XMVECTOR player_To_camPos = XMLoadFloat3(&camera_position) - XMLoadFloat3(&playerHead_position);
-        player_To_camPos = XMVector3Normalize(player_To_camPos);
+        {
 
-        // 回転行列をマウスの移動量を基に作成
-        XMMATRIX matRotate = 
-            XMMatrixRotationX(XMConvertToRadians(mouseMove.y * sensitivity)) * XMMatrixRotationY(XMConvertToRadians(mouseMove.x * sensitivity));
+            // 正規化済みの向きベクトルを用意
+            XMVECTOR player_To_camPos = XMLoadFloat3(&camera_position) - XMLoadFloat3(&playerHead_position);
+            player_To_camPos = XMVector3Normalize(player_To_camPos);
 
-        // 回転行列を掛けて、向きベクトルを回転
-        player_To_camPos = XMVector3Transform(player_To_camPos, matRotate);
+            // 回転行列をマウスの移動量を基に作成
+            XMMATRIX matRotate =
+                /*XMMatrixRotationX(XMConvertToRadians(mouseMove.y * sensitivity)) **/ XMMatrixRotationY(XMConvertToRadians(mouseMove.x * sensitivity));
 
-        // 長さを変更
-        //static float dist = playerCameraDistance;
-        //if(mouseMove.z > 0)dist = mouseMove.z;
-        player_To_camPos *= playerCameraDistance;
+            // 回転行列を掛けて、向きベクトルを回転
+            player_To_camPos = XMVector3Transform(player_To_camPos, matRotate);
 
-        // 原点０，０から回転後のカメラの位置に伸びるベクトルを作成し、位置に代入
-        XMVECTOR origin_To_camPos = player_To_camPos + XMLoadFloat3(&playerHead_position);
-        XMStoreFloat3(&camera_position, origin_To_camPos);
+            // 長さを変更
+            player_To_camPos *= playerCameraDistance;
 
-        // ===== カメラの焦点の回転 =====
-        XMFLOAT3 camera_target = Camera::GetPosition();
-        XMVECTOR origin_To_camTarget = XMLoadFloat3(&playerHead_position) - player_To_camPos;
+            // 原点０，０から回転後のカメラの位置に伸びるベクトルを作成し、位置に代入
+            XMVECTOR origin_To_camPos = player_To_camPos + XMLoadFloat3(&playerHead_position);
+            XMStoreFloat3(&camera_position, origin_To_camPos);
 
-        XMStoreFloat3(&camera_target, origin_To_camTarget);
-        
+        }
+
+        // カメラの焦点の回転
+        XMFLOAT3 camera_target = Camera::GetTarget();
+        {
+
+            // 正規化済みの向きベクトルを用意
+            XMVECTOR player_To_camPos = XMLoadFloat3(&camera_position) - XMLoadFloat3(&playerHead_position);
+            player_To_camPos = XMVector3Normalize(player_To_camPos);
+
+            // 回転行列をマウスの移動量を基に作成
+            XMMATRIX matRotate =
+                /*XMMatrixRotationX(XMConvertToRadians(mouseMove.y * sensitivity) + 45.f) **/ XMMatrixRotationY(XMConvertToRadians(mouseMove.x * sensitivity) + 45.f);
+
+            // 回転行列を掛けて、向きベクトルを回転
+            XMVECTOR player_To_camTgt = XMVector3Transform(player_To_camPos, matRotate);
+
+            // 長さを変更
+            player_To_camTgt *= playerCameraDistance;
+
+            // 原点０，０から回転後のカメラの位置に伸びるベクトルを作成し、位置に代入
+            XMVECTOR origin_To_camTgt = XMLoadFloat3(&playerHead_position) - player_To_camTgt;
+            XMStoreFloat3(&camera_target, origin_To_camTgt);
+
+        }
+
         ImGui::Text("camera_position = %f,%f,%f", camera_position.x, camera_position.y, camera_position.z);
-        ImGui::Text("camera_target = %f,%f,%f", camera_target.x, camera_target.y, camera_target.z);
-       
         Camera::SetPosition(camera_position);
+
+        // 焦点が頭部の時はうまくいく。
+        //Camera::SetTarget(playerHead_position);
+
+        ImGui::Text("camera_target = %f,%f,%f", camera_target.x, camera_target.y, camera_target.z);
         Camera::SetTarget(camera_target);
+
     }
 }
 
