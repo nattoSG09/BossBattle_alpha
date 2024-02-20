@@ -28,7 +28,9 @@ void TestScene::Initialize()
 		player_ = Instantiate<Player>(this);
 
 		// 鉱石
-
+		for(int i=0;i<10;i++)
+		OreManager::CreateOre<Ore>(XMFLOAT3((rand() % 7 - 4) * 5, 0, (rand() % 7 - 4)* 5), this);
+		
 		// ステージ
 		pStage_ = Instantiate<Stage>(this);
 

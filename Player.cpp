@@ -4,6 +4,7 @@
 #include "Engine/ImGui/imgui.h"
 #include "Engine/Input.h"
 
+#include "OreManager.h"
 #include "Ore.h"
 #include "Engine/Camera.h"
 
@@ -264,34 +265,31 @@ void Player::Release()
 
 void Player::Mining()
 {
-    // 鉱石の情報を取得
-    Ore* ore = (Ore*)FindObject("Ore");
-    if (ore == nullptr)return;
+    for (auto& ore : OreManager::ores_) {
+        // 視線ベクトルを取得
+        XMVECTOR sightline = XMVector3Normalize(Camera::GetSightline());
 
-    // 視線ベクトルを取得
-    XMVECTOR sightline = XMVector3Normalize(Camera::GetSightline());
+        // レイキャストを発射
+        RayCastData sightRay; {
+            XMStoreFloat3(&sightRay.dir, sightline);
+            sightRay.start = Camera::GetPosition();
+            Model::RayCast(ore->GetModelHandle(), &sightRay);
 
-    // レイキャストを発射
-    RayCastData sightRay; {
-        XMStoreFloat3(&sightRay.dir, sightline);
-        sightRay.start = Camera::GetPosition();
-        Model::RayCast(ore->GetModelHandle(), &sightRay);
-
-        // debug
-        ImGui::Text("sightRay.hit = %s", sightRay.hit ? "true" : "false");
-    }
-
-    // 採掘可能かどうか
-    bool isMining = false;
-    if (ore->GetCircle().ContainsPoint(transform_.position_.x, transform_.position_.z)
-        && sightRay.hit) {
-
-        isMining = true;
-        if (Input::IsMouseButtonDown(0)) {
-            ore->KillMe();
-            isMining = false;
+            // debug
+            ImGui::Text("sightRay.hit = %s", sightRay.hit ? "true" : "false");
         }
-    }
-    ImGui::Text("isMining = %s", isMining ? "true" : "false");
 
+        // 採掘可能かどうか
+        bool isMining = false;
+        if (ore->GetCircle().ContainsPoint(transform_.position_.x, transform_.position_.z)
+            && sightRay.hit) {
+
+            isMining = true;
+            if (Input::IsMouseButtonDown(0)) {
+                OreManager::Destroy(ore);
+                isMining = false;
+            }
+        }
+        ImGui::Text("isMining = %s", isMining ? "true" : "false");
+    }
 }

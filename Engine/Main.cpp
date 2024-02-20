@@ -32,6 +32,7 @@ const char* WIN_CLASS_NAME = "SampleGame";	//ウィンドウクラス名
 bool isFullscreen = false;
 LONG_PTR g_windowStyle;
 RECT winRect;
+bool isCursorStop = false;
 
 //プロトタイプ宣言
 HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdShow);
@@ -164,6 +165,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//ルートオブジェクトのDrawを呼んだあと、自動的に子、孫のUpdateが呼ばれる
 				pRootObject->DrawSub();
 
+				// マウスカーソルを固定
+				if (isCursorStop)SetCursorPos(400, 300);
 
 				//エフェクトの描画
 				VFX::Draw();
@@ -290,6 +293,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		// キーが押されたら、マウスカーソルの可視性を切り替える
 		if (wParam == VK_F3) {
 			isCursorVisible = !isCursorVisible;
+			isCursorStop = !isCursorStop;
 			ShowCursor(isCursorVisible);
 		}
 		else if (wParam == VK_F11)ToggleFullscreen(hWnd);

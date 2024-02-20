@@ -15,9 +15,10 @@ namespace OreManager
 
 	template<class T>
 	void CreateOre(XMFLOAT3 _position, GameObject* parent) {
-		T* ore = Instantiate<T>(this);
+		T* ore = Instantiate<T>(parent);
 		ore->SetPosition(_position);
 		ores_.push_back(ore);
 	}
 
+	void Destroy(Ore* _ore);
 };
