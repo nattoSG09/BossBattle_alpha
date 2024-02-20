@@ -286,10 +286,18 @@ void Player::Mining()
 
             isMining = true;
             if (Input::IsMouseButtonDown(0)) {
-                OreManager::Destroy(ore);
+
+                if (ore->GetDurability() <= 0) {
+                    OreManager::Destroy(ore);
+                }
+                else {
+                    ore->SetDurability(ore->GetDurability() - 1);
+                }
+
                 isMining = false;
             }
         }
         ImGui::Text("isMining = %s", isMining ? "true" : "false");
+        ImGui::Text("duravity = %d", ore->GetDurability());
     }
 }

@@ -4,7 +4,7 @@
 #include "Player.h"
 
 Ore::Ore(GameObject* _pParent)
-	:GameObject(_pParent,"Ore")
+	:GameObject(_pParent,"Ore"),durability_(3)
 {
 }
 
