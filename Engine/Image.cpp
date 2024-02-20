@@ -191,5 +191,16 @@ namespace Image
 		}
 		return _datas[handle]->transform.GetWorldMatrix();
 	}
+
+	XMFLOAT2 GetSize(int handle)
+	{
+		if (handle < 0 || handle >= _datas.size())
+		{
+			return XMFLOAT2(0,0);
+		}
+		XMFLOAT3 size = _datas[handle]->pSprite->GetTextureSize();
+
+		return XMFLOAT2(size.x,size.y);
+	}
 }
 

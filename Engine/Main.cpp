@@ -23,12 +23,16 @@
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_dx11.h"
 #include "ImGui/imgui_impl_win32.h"
+#include "Transition.h"
 
 #pragma comment(lib,"Winmm.lib")
 
 //定数宣言
 const char* WIN_CLASS_NAME = "SampleGame";	//ウィンドウクラス名
-
+bool isFullscreen = false;
+LONG_PTR g_windowStyle;
+RECT winRect;
+bool isCursorStop = false;
 
 //プロトタイプ宣言
 HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdShow);
@@ -74,6 +78,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//入力処理（キーボード、マウス、コントローラー）の準備
 	Input::Initialize(hWnd);
+
+	// トランジション処理の準備
+	Transition::Initialize();
 
 	//オーディオ（効果音）の準備
 	Audio::Initialize();
@@ -129,7 +136,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				FPS++;						//画面更新回数をカウントする
 
 
-
+				// トランジションの更新
+				Transition::Update();
 
 				//入力（キーボード、マウス、コントローラー）情報を更新
 				Input::Update();
@@ -152,13 +160,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//このフレームの描画開始
 				Direct3D::BeginDraw();
 
+				
 				//全オブジェクトを描画
 				//ルートオブジェクトのDrawを呼んだあと、自動的に子、孫のUpdateが呼ばれる
 				pRootObject->DrawSub();
 
+				// マウスカーソルを固定
+				if (isCursorStop)SetCursorPos(400, 300);
+
 				//エフェクトの描画
 				VFX::Draw();
 
+				// トランジションの描画
+				Transition::Draw();
 
 				ImGui::Render();
 				ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
@@ -181,6 +195,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Audio::AllRelease();
 	Model::AllRelease();
 	Image::AllRelease();
+	Transition::Release();
 	pRootObject->ReleaseSub();
 	SAFE_DELETE(pRootObject);
 	Direct3D::Release();
@@ -209,7 +224,7 @@ HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdSho
 	RegisterClassEx(&wc);
 
 	//ウィンドウサイズの計算
-	RECT winRect = { 0, 0, screenWidth, screenHeight };
+	winRect = { 0, 0, screenWidth, screenHeight };
 	AdjustWindowRect(&winRect, WS_OVERLAPPEDWINDOW, FALSE);
 
 	//タイトルバーに表示する内容
@@ -237,17 +252,57 @@ HWND InitApp(HINSTANCE hInstance, int screenWidth, int screenHeight, int nCmdSho
 	return hWnd;
 }
 
+void ToggleFullscreen(HWND hwnd)
+{
+	isFullscreen = !isFullscreen;
+
+	if (isFullscreen)
+	{
+		g_windowStyle = GetWindowLongPtr(hwnd, GWL_STYLE);
+		// ウィンドウスタイルをフルスクリーンに変更d
+		SetWindowLong(hwnd, GWL_STYLE, WS_POPUP | WS_VISIBLE);
+		// ウィンドウサイズをディスプレイの解像度に合わせる
+		SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+	}
+	else
+	{
+		// ウィンドウスタイルを通常のウィンドウに戻す
+		SetWindowLong(hwnd, GWL_STYLE, g_windowStyle);
+		// ウィンドウサイズを元に戻す
+		SetWindowPos(hwnd, HWND_NOTOPMOST, winRect.left, winRect.top, winRect.right - winRect.left, winRect.bottom - winRect.top, SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+	}
+}
+
+
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND _hWnd, UINT _msg, WPARAM _wParam, LPARAM _lParam);
 
 //ウィンドウプロシージャ（何かあった時によばれる関数）
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	static BOOL isCursorVisible = TRUE;
+
 	switch (msg)
 	{
 	//ウィンドウを閉じた
 	case WM_DESTROY:
 		PostQuitMessage(0);	//プログラム終了
 		return 0;
+
+
+	case WM_KEYDOWN:
+		// キーが押されたら、マウスカーソルの可視性を切り替える
+		if (wParam == VK_F3) {
+			isCursorVisible = !isCursorVisible;
+			isCursorStop = !isCursorStop;
+			ShowCursor(isCursorVisible);
+		}
+		else if (wParam == VK_F11)ToggleFullscreen(hWnd);
+		
+		else if (wParam == VK_ESCAPE) {
+			if(MessageBox(NULL, "ゲームを終了しますか？", "終了", MB_YESNO) == IDYES)
+			PostQuitMessage(0);	//プログラム終了
+		}
+
 
 	//マウスが動いた
 	case WM_MOUSEMOVE:

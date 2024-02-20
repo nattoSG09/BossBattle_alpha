@@ -19,6 +19,11 @@ bool Circle::ContainsPoint(XMFLOAT2 _point)
     return c <= radius_;
 }
 
+bool Circle::ContainsPoint(float _px, float _py)
+{
+    return ContainsPoint(XMFLOAT2(_px,_py));
+}
+
 bool Circle::OverlapCircle(Circle _circle)
 {
     float a = _circle.center_.x - this->center_.x;

@@ -1,10 +1,9 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Rect.h"
 
 class Stage : public GameObject
 {
-	int hm_Stage_view;
-	int hm_Stage_collision;
 public:
 	Stage(GameObject* _pParent);
 	void Initialize() override;
@@ -12,5 +11,6 @@ public:
 	void Draw() override;
 	void Release() override;
 
+	Rect GetExitRect() { return exitRect_; }
 };
 

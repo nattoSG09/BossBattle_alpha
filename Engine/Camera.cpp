@@ -35,11 +35,20 @@ void Camera::Update()
 //焦点を設定
 void Camera::SetTarget(XMFLOAT3 target) { _target = target; }
 
+void Camera::SetTarget(float x, float y, float z) { SetTarget(XMFLOAT3(x, y, z)); }
+
 //位置を設定
 void Camera::SetPosition(XMFLOAT3 position) { _position = position; }
 
+void Camera::SetPosition(float x, float y, float z) { SetPosition(XMFLOAT3(x, y, z)); }
+
 //焦点を取得
 XMFLOAT3 Camera::GetTarget() { return _target; }
+
+XMVECTOR Camera::GetSightline()
+{
+	return XMLoadFloat3(&_target) - XMLoadFloat3(&_position);
+}
 
 //位置を取得
 XMFLOAT3 Camera::GetPosition() { return _position; }
