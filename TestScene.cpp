@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "OreManager.h"
 #include "SkySphere.h"
+#include "Enemy.h"
+
 #include "Engine/SceneManager.h"
 
 TestScene::TestScene(GameObject * parent)
@@ -26,6 +28,9 @@ void TestScene::Initialize()
 	{
 		// ƒvƒŒƒCƒ„[
 		player_ = Instantiate<Player>(this);
+
+		// “G
+		Instantiate<Enemy>(this);
 
 		// zÎ
 		for(int i=0;i<10;i++)

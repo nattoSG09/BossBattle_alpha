@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine\Transition.cpp" />
     <ClCompile Include="LoadScene.cpp" />
     <ClCompile Include="Ore.cpp" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine\Transition.h" />
     <ClInclude Include="LoadScene.h" />
     <ClInclude Include="Ore.h" />
