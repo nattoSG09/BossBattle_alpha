@@ -5,7 +5,7 @@
 #include<iostream>
 #include "Stage.h"
 #include "Player.h"
-#include "Ore.h"
+#include "OreManager.h"
 #include "SkySphere.h"
 #include "Engine/SceneManager.h"
 
@@ -28,10 +28,6 @@ void TestScene::Initialize()
 		player_ = Instantiate<Player>(this);
 
 		// 鉱石
-		for (int i = 0; i < 3; i++) {
-			Ore* ore = Instantiate<Ore>(this);
-			ore->SetPosition(rand() % 20 + 1, 0, rand() % 20 + 1);
-		}
 
 		// ステージ
 		pStage_ = Instantiate<Stage>(this);

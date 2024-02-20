@@ -152,9 +152,6 @@
     <ClCompile Include="LoadScene.cpp">
       <Filter>Game\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Ore.cpp">
-      <Filter>Game\Objects\Ore</Filter>
-    </ClCompile>
     <ClCompile Include="SkySphere.cpp">
       <Filter>Game\Objects\SkySqhere</Filter>
     </ClCompile>
@@ -176,14 +173,11 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game\Objects\Player</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Game\Objects\Player\State</Filter>
+    <ClCompile Include="Ore.cpp">
+      <Filter>Game\Objects\Ore</Filter>
     </ClCompile>
-    <ClCompile Include="Waiting.cpp">
-      <Filter>Game\Objects\Player\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Moving.cpp">
-      <Filter>Game\Objects\Player\State</Filter>
+    <ClCompile Include="OreManager.cpp">
+      <Filter>Game\Objects\Ore</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,14 +307,8 @@
     <ClInclude Include="Player.h">
       <Filter>Game\Objects\Player</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Game\Objects\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Waiting.h">
-      <Filter>Game\Objects\Player\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Moving.h">
-      <Filter>Game\Objects\Player\State</Filter>
+    <ClInclude Include="OreManager.h">
+      <Filter>Game\Objects\Ore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
