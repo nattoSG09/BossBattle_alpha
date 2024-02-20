@@ -49,9 +49,7 @@ void TestScene::Update()
 	if (pStage_->GetExitRect().ContainsPoint(playerPos.x, playerPos.z)) {
 		ImGui::Text("exit ok");
 		((SceneManager*)FindObject("SceneManager"))->ChangeScene(SCENE_ID_LOAD, TID_BLACKOUT, 1.f);
-
 	}
-
 }
 
 void TestScene::Draw()
