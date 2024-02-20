@@ -3,6 +3,7 @@
 
 class Enemy : public GameObject
 {
+	int hModel_;
 public:
 	Enemy(GameObject* parent);
 	void Initialize() override;
