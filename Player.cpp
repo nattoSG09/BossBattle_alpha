@@ -34,34 +34,93 @@ void Player::Update()
         ImGui::Text("Player.position = %f,%f,%f", pPos.x, pPos.y, pPos.z);
 	}
 	
-	// 移動処理&アニメーション処理
-	{
-		bool isAnim = false;
+    // new 移動処理
+    {
+
+        // アニメーションがされているかどうか
+        bool isAnim = false;
+
+        // プレイヤーの速度
+        float speed = 0.1f;
+
+        // 正規化した視線ベクトルを取得
+        XMVECTOR moveDir = XMVector3Normalize(Camera::GetSightline());
+
+        // debug
+        {
+            XMFLOAT3 mdf = {
+                XMVectorGetX(moveDir),
+                XMVectorGetY(moveDir),
+                XMVectorGetZ(moveDir),
+            };
+            ImGui::Text("moveDir = %f,%f,%f", mdf.x, mdf.y, mdf.z);
+        }
+
+        // Y方向への移動を制限したいので、Y要素を０にする
+        moveDir = XMVectorSetY(moveDir, 0);
+
+        // スピードを乗算
+        moveDir *= speed;
+
+
+        // 移動方向ベクトルを用意
+        XMVECTOR move{ 0,0,0,0 };
+
+        ImGui::Begin("input key");
+
+        // 「Ｗ」キーが押されたら...
         if (Input::IsKey(DIK_W)) {
-            transform_.rotate_.y = 0;
-            transform_.position_.z += 0.1f;
+            ImGui::Text("W");
+
+            // 画面前方に進む
+            move = XMLoadFloat3(&transform_.position_) + moveDir;
+            XMStoreFloat3(&transform_.position_, move);
+
+            // アニメーションを動作させる
             isAnim = true;
         }
 
+        // 「Ａ」キーが押されたら...
         if (Input::IsKey(DIK_A)) {
-            transform_.rotate_.y = -90;
-            transform_.position_.x -= 0.1f;
+            ImGui::Text("A");
+
+            // 画面右方に進む
+            moveDir = XMVector3Transform(moveDir, XMMatrixRotationY(XMConvertToRadians(90)));
+            move = XMLoadFloat3(&transform_.position_) - moveDir;
+            XMStoreFloat3(&transform_.position_, move);
+
+            // アニメーションを動作させる
             isAnim = true;
         }
 
+        // 「Ｓ」キーが押されたら...
         if (Input::IsKey(DIK_S)) {
-            transform_.rotate_.y = 180;
-            transform_.position_.z -= 0.1f;
+            ImGui::Text("S");
+
+            // 画面後方に進む
+            move = XMLoadFloat3(&transform_.position_) - moveDir;
+            XMStoreFloat3(&transform_.position_, move);
+
+            // アニメーションを動作させる
             isAnim = true;
         }
 
+        // 「Ｄ」キーが押されたら...
         if (Input::IsKey(DIK_D)) {
-            transform_.rotate_.y = 90;
-            transform_.position_.x += 0.1f;
+            ImGui::Text("D");
+
+            // 画面左方に進む
+            moveDir = XMVector3Transform(moveDir, XMMatrixRotationY(XMConvertToRadians(90)));
+            move = XMLoadFloat3(&transform_.position_) + moveDir;
+            XMStoreFloat3(&transform_.position_, move);
+
+            // アニメーションを動作させる
             isAnim = true;
         }
 
+        ImGui::End();
 
+        // アニメーションを行う
         static bool prevAnim = false;
         if (isAnim == true) {
             if (prevAnim == false)Model::SetAnimFrame(hModel_, 0, 60, 1);
@@ -71,8 +130,7 @@ void Player::Update()
             Model::SetAnimFrame(hModel_, 0, 0, 0);
             prevAnim = false;
         }
-	}
-
+    }
     // 採掘処理
     {
         bool isMining = false;
