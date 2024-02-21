@@ -50,9 +50,9 @@ Enemy::Enemy(GameObject* parent)
 
 void Enemy::Initialize()
 {
-    
+    monsterInfo_ = LoadMonsterInfo("monsters.ini")["DiamondMutant"];
 
-	hModel_ = Model::Load();
+	hModel_ = Model::Load(monsterInfo_.filePath);
 	Model::SetAnimFrame(hModel_, 0, 162, 1);
 
 	transform_.rotate_.y = 180.f;

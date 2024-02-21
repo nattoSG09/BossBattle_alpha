@@ -12,7 +12,7 @@ struct MonsterInfo {
 class Enemy : public GameObject
 {
 	int hModel_;
-	std::map<std::string, MonsterInfo> monsters_;
+	MonsterInfo monsterInfo_;
 public:
 	Enemy(GameObject* parent);
 	void Initialize() override;
