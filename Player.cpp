@@ -10,7 +10,7 @@
 
 namespace {
     const float sensitivity = 0.5f;// マウス感度
-    const float playerCameraDistance = 4.f;
+    const float playerCameraDistance = 10.f;
     const float playerHeadHeight = 4.f;
 
     // 二つのベクトルから角度を求める関数(ラジアン)
