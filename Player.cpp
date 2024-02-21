@@ -258,10 +258,10 @@ void Player::Update()
         Camera::SetPosition(camera_position);
 
         // Å“_‚ª“ª•”‚Ì‚Í‚¤‚Ü‚­‚¢‚­B
-        //Camera::SetTarget(playerHead_position);
+        Camera::SetTarget(playerHead_position);
 
         ImGui::Text("camera_target = %f,%f,%f", camera_target.x, camera_target.y, camera_target.z);
-        Camera::SetTarget(camera_target);
+        //Camera::SetTarget(camera_target);
 
     }
 }
