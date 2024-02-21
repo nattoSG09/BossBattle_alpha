@@ -10,7 +10,7 @@
 
 namespace {
     const float sensitivity = 0.5f;// マウス感度
-    const float playerCameraDistance = 10.f;
+    const float playerCameraDistance = 5.f;
     const float playerHeadHeight = 4.f;
 
     // 二つのベクトルから角度を求める関数(ラジアン)
@@ -258,10 +258,10 @@ void Player::Update()
         Camera::SetPosition(camera_position);
 
         // 焦点が頭部の時はうまくいく。
-        Camera::SetTarget(playerHead_position);
+        //Camera::SetTarget(playerHead_position);
 
         ImGui::Text("camera_target = %f,%f,%f", camera_target.x, camera_target.y, camera_target.z);
-        //Camera::SetTarget(camera_target);
+        Camera::SetTarget(camera_target);
 
     }
 }

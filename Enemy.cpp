@@ -10,10 +10,12 @@ Enemy::Enemy(GameObject* parent)
 void Enemy::Initialize()
 {
 	CsvReader csv;
-	csv.Load("ƒtƒ@ƒCƒ‹–¼.csv");
+	csv.Load("OreMonsterData.csv");
 
 	hModel_ = Model::Load("Models/OreTyrantrolling.fbx");
 	Model::SetAnimFrame(hModel_, 0, 162, 1);
+
+	transform_.rotate_.y = 180.f;
 }
 
 void Enemy::Update()
