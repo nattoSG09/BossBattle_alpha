@@ -1,0 +1,6 @@
+モンスター名,速さ,メンタル,モデルファイルパス
+DiamondMonster,2,0,Models/DiamondMonster
+GoldMonster,,,Models/GoldMonster
+EmeraldMonster,,,Models/EmeraldMonster
+IronMonster,,,Models/IronMonster
+RubyMonster,,,Models/RubyMonster

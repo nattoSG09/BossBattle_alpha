@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Engine/Model.h"
+#include "Engine/CsvReader.h"
 
 Enemy::Enemy(GameObject* parent)
 	:GameObject(parent,"Enemy")
@@ -8,6 +9,9 @@ Enemy::Enemy(GameObject* parent)
 
 void Enemy::Initialize()
 {
+	CsvReader csv;
+	csv.Load("ƒtƒ@ƒCƒ‹–¼.csv");
+
 	hModel_ = Model::Load("Models/OreTyrantrolling.fbx");
 	Model::SetAnimFrame(hModel_, 0, 162, 1);
 }
